@@ -82,7 +82,6 @@ const App: React.FC = () => {
     }
   }, []);
 
-
   const renderContent = () => {
     switch (appPhase) {
       case AppPhase.JOB_INPUT:
@@ -122,11 +121,22 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-between p-4 md:p-8 selection:bg-sky-500 selection:text-white">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 selection:bg-sky-500 selection:text-white relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-sky-400/10 to-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-tr from-purple-400/10 to-pink-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-sky-400/5 to-blue-500/5 rounded-full blur-3xl animate-pulse delay-500"></div>
+      </div>
+      
       <Header title={APP_TITLE} />
-      <main className="container mx-auto flex-grow flex flex-col items-center justify-center w-full max-w-3xl px-4 py-8">
-        {renderContent()}
+      
+      <main className="container mx-auto flex-grow flex flex-col items-center justify-center w-full max-w-4xl px-6 py-12 relative z-10">
+        <div className="w-full transform transition-all duration-700 ease-out">
+          {renderContent()}
+        </div>
       </main>
+      
       <Footer />
     </div>
   );
